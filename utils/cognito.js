@@ -3,7 +3,6 @@ const { parse } = require('node:url')
 
 const jwt = require('jsonwebtoken')
 
-const COGNITO_WELL_KNOWN_URL = 'https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_iOhoo0gxf/.well-known/jwks.json'
 
 const getCognitoTokensFromCodeUrlQuery = async (req, res) => {
   const url = parse(req.url, process.env.HOST)
@@ -22,7 +21,7 @@ const getCognitoTokensFromCodeUrlQuery = async (req, res) => {
 }
 
 const fetchCognitoJsonWebKeys = async () => {
-  return fetch(COGNITO_WELL_KNOWN_URL, { method: 'GET'})
+  return fetch(process.env.COGNITO_WELL_KNOWN_URL, { method: 'GET'})
     .then((res) => res.json())
 }
 
